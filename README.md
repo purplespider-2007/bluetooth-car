@@ -2,27 +2,28 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# Smart Accident Prevention and Alert Robot Car
 
 ## Basic Details
 
-### Team Name: [Name]
+### Team Name Robocore
 
 ### Team Members
-- Member 1: [Name] - [College]
-- Member 2: [Name] - [College]
+- Member 1: Haritha Rani - College of Engineering Trivandrum
+- Member 2: Devika M G - College of Engineering Trivandrum
 
 ### Hosted Project Link
 [mention your project hosted link here]
 
 ### Project Description
-[2-3 lines about what your project does]
+This project uses an Arduino Uno with two IR sensors and a Bluetooth module to design a smart robot car that stops automatically when an obstacle is detected, preventing accidents.
+
 
 ### The Problem statement
-[What problem are you solving?]
+Accidents and collisions may occur in manually controlled robot cars due to delayed human reaction or unnoticed obstacles. To improve safety, there is a need for a system that can automatically detect obstacles and stop the vehicle immediately.
 
 ### The Solution
-[How are you solving it?]
+We solve the problem by detecting obstacles early using IR sensors and automatically stopping or changing direction to prevent collisions. The Bluetooth module allows wireless control, making the system both safe and user-friendly.
 
 ---
 
@@ -31,25 +32,25 @@
 ### Technologies/Components Used
 
 **For Software:**
-- Languages used: [e.g., JavaScript, Python, Java]
-- Frameworks used: [e.g., React, Django, Spring Boot]
-- Libraries used: [e.g., axios, pandas, JUnit]
-- Tools used: [e.g., VS Code, Git, Docker]
+- Languages used: c++
+- Frameworks used: NIL
+- Libraries used: NIL
+- Tools used: Arduino IDE
 
 **For Hardware:**
-- Main components: [List main components]
-- Specifications: [Technical specifications]
-- Tools required: [List tools needed]
+- Main components: Arduino UNO,Motor driver(LN298),HC-05 bluetooth module,motors(4WD),IR sensors
+- Specifications: Microcontroller: Arduino Uno (5V, 16 MHz),Bluetooth: HC-05 / HC-06 (2.4 GHz, ~10 m range),Obstacle Sensors: IR Sensors (2–30 cm range, 5V),Motor Driver: L298N (5–35V, 2A per channel),Motors: 6–12V DC geared motors,Power Supply: 7–12V battery,Functions: Automatic obstacle avoidance + Bluetooth control + Alert indication (LED/Buzzer)
+- Tools required: Soldering iron, solder wire, screwdriver set, wire stripper, cutter, breadboard, multimeter, hot glue gun,
 
 ---
 
 ## Features
 
 List the key features of your project:
-- Feature 1: [Description]
-- Feature 2: [Description]
-- Feature 3: [Description]
-- Feature 4: [Description]
+- Feature 1: Automatic obstacle detection
+- Feature 2: Collision prevention (auto stop / direction change)
+- Feature 3: Bluetooth wireless control
+
 
 ---
 
@@ -70,10 +71,16 @@ List the key features of your project:
 ### For Hardware:
 
 #### Components Required
-[List all components needed with specifications]
+Arduino Uno, HC-05 / HC-06, IR obstacle sensors, L298N, DC motors, robot chassis with wheels, 9V/12V battery, jumper wires
 
 #### Circuit Setup
-[Explain how to set up the circuit]
+IR Sensors: VCC → 5V, GND → GND, OUT → Arduino digital pins (e.g., D2, D3)
+
+Bluetooth Module (HC-05/HC-06): VCC → 5V, GND → GND, TX → RX, RX → TX (use voltage divider if needed)
+
+Motor Driver (L298N): IN1–IN4 → Arduino digital pins, OUT1–OUT4 → DC motors, 12V → Battery, GND → Common ground
+
+Power: Arduino powered via battery or VIN; all grounds connected together
 
 ---
 
@@ -110,24 +117,48 @@ List the key features of your project:
 
 #### Schematic & Circuit
 
-![Circuit](Add your circuit diagram here)
-*Add caption explaining connections*
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/33c895bd-ec2d-4d82-821a-0ec2c33ad39b" />
+1️⃣ Arduino Uno – Main Controller
+Controls the entire system by reading sensor inputs and sending signals to the motor driver and Bluetooth module.
 
-![Schematic](Add your schematic diagram here)
-*Add caption explaining the schematic*
+2️⃣ IR Obstacle Sensors – Object Detection
+Connected to digital pins (D2, D3). They detect obstacles and send HIGH/LOW signals to the Arduino.
+
+3️⃣ HC-05 – Wireless Communication
+Connected to RX/TX pins for serial communication. Receives movement commands from the smartphone.
+
+4️⃣ L298N – Motor Control Unit
+Receives control signals (IN1–IN4) from Arduino and drives the left and right DC motors.
+
+5️⃣ DC Motors – Movement
+Connected to OUT1–OUT4 of L298N. Enable forward, backward, left, and right motion.
+
+6️⃣ 12V Battery – Power Supply
+Supplies power to the motor driver and Arduino (common ground shared across all components).
+
+7️⃣ Common Ground Connection
+All GND terminals are connected together to ensure proper circuit operation.
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/797484e6-7bb0-43d1-9d3c-bc9e4733dc0c" />
+
 
 #### Build Photos
 
-![Team](Add photo of your team here)
+Devika MG : ![IMG-20260228-WA0004](https://github.com/user-attachments/assets/91c9342c-fe91-4741-b5fd-e930ca789ed4)
+Haritha Rani J : ![IMG_20260227_194605](https://github.com/user-attachments/assets/7fd64dd9-06f2-4381-b633-acbd7e2d4f8b)
+
+
 
 ![Components](Add photo of your components here)
 *List out all components shown*
 
-![Build](Add photos of build process here)
-*Explain the build steps*
+![IMG-20260228-WA0005](https://github.com/user-attachments/assets/53044d08-1de3-4b52-8e6e-c40e068ac7a7)
+![IMG20260228170051](https://github.com/user-attachments/assets/685d02cc-9ed8-48d0-86ba-aa7b2e60eeb6)
 
-![Final](Add photo of final product here)
-*Explain the final build*
+
+
+![IMG_20260228_174840](https://github.com/user-attachments/assets/486a9bdd-cf78-41c3-a9e4-6e312ad16fef)
+
 
 ---
 
@@ -219,48 +250,52 @@ xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug
 
 #### Bill of Materials (BOM)
 
-| Component | Quantity | Specifications | Price | Link/Source |
-|-----------|----------|----------------|-------|-------------|
-| Arduino Uno | 1 | ATmega328P, 16MHz | ₹450 | [Link] |
-| LED | 5 | Red, 5mm, 20mA | ₹5 each | [Link] |
-| Resistor | 5 | 220Ω, 1/4W | ₹1 each | [Link] |
-| Breadboard | 1 | 830 points | ₹100 | [Link] |
-| Jumper Wires | 20 | Male-to-Male | ₹50 | [Link] |
-| [Add more...] | | | | |
+![IMG_20260228_180131](https://github.com/user-attachments/assets/ac4e0b4d-6006-4055-a645-63137874da22)
 
-**Total Estimated Cost:** ₹[Amount]
+
+**Total Estimated Cost:** ₹2000
 
 #### Assembly Instructions
 
-**Step 1: Prepare Components**
-1. Gather all components listed in the BOM
-2. Check component specifications
-3. Prepare your workspace
-![Step 1](images/assembly-step1.jpg)
-*Caption: All components laid out*
+Step 1: Prepare the Components
+Collect all required components from the components list.
+Verify voltage and rating specifications.
+Arrange tools and components neatly on your workspace.
 
-**Step 2: Build the Power Supply**
-1. Connect the power rails on the breadboard
-2. Connect Arduino 5V to breadboard positive rail
-3. Connect Arduino GND to breadboard negative rail
-![Step 2](images/assembly-step2.jpg)
-*Caption: Power connections completed*
 
-**Step 3: Add Components**
-1. Place LEDs on breadboard
-2. Connect resistors in series with LEDs
-3. Connect LED cathodes to GND
-4. Connect LED anodes to Arduino digital pins (2-6)
-![Step 3](images/assembly-step3.jpg)
-*Caption: LED circuit assembled*
+Step 2: Set Up the Power Connections
 
-**Step 4: [Continue for all steps...]**
+Connect the power rails on the breadboard (if used).
+Connect the 5V output from the Arduino Uno to the positive rail.
+Connect GND from Arduino to the negative rail (common ground).
 
-**Final Assembly:**
-![Final Build](images/final-build.jpg)
-*Caption: Completed project ready for testing*
+Step 3: Connect IR Sensors
 
----
+Connect VCC of IR sensors to 5V.
+Connect GND to common ground.
+Connect OUT pins to Arduino digital pins (e.g., D2, D3).
+
+
+Step 4: Connect Bluetooth Module
+
+Connect VCC to 5V and GND to GND.
+Connect TX of HC-05 to Arduino RX.
+Connect RX of HC-05 to Arduino TX (use voltage divider if required).
+
+
+Step 5: Connect Motor Driver
+
+Connect IN1–IN4 of L298N to Arduino digital pins.
+Connect OUT1–OUT4 to left and right DC motors.
+Connect 12V battery to motor driver power terminals.
+Ensure all grounds are connected together.
+
+
+Final Assembly
+
+Mount all components securely on the robot chassis.
+Insert battery and upload the Arduino program.
+Test obstacle detection and Bluetooth control.
 
 ### For Scripts/CLI Tools:
 
@@ -361,9 +396,8 @@ python script.py -v --format json data.json
 ## Project Demo
 
 ### Video
-[Add your demo video link here - YouTube, Google Drive, etc.]
 
-*Explain what the video demonstrates - key features, user flow, technical highlights*
+https://drive.google.com/file/d/1i_znl64aOWdwDFneTNbhbjiHqsCi_GyB/view?usp=drive_link
 
 ### Additional Demos
 [Add any extra demo materials/links - Live site, APK download, online demo, etc.]
@@ -400,9 +434,10 @@ If you used AI tools during development, document them here for transparency:
 
 ## Team Contributions
 
-- [Name 1]: [Specific contributions - e.g., Frontend development, API integration, etc.]
-- [Name 2]: [Specific contributions - e.g., Backend development, Database design, etc.]
-- [Name 3]: [Specific contributions - e.g., UI/UX design, Testing, Documentation, etc.]
+- [HARITHA RANI J]: Responsible for circuit connections, motor driver setup, sensor integration, chassis assembly, and overall hardware implementation.
+
+
+- [DEVIKA M G]:Developed the Arduino code, integrated Bluetooth and obstacle detection features, performed testing, and prepared the project report and presentation.
 
 ---
 
